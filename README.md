@@ -1,2 +1,2 @@
 # piserver
-server, database
+Server, database, casual website w/ uploading files
