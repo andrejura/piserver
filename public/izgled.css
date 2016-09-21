@@ -1,0 +1,71 @@
+#welcome {
+    font-family: "Brush Script MT", cursive;
+    text-align: center;
+    color: blue;
+    font-weight: bold;
+    font-style: oblique;
+    font-size: 50px;
+    text-shadow: 2px 2px white, -2px -2px white;
+}
+body {
+    background-image: url('/Slike/webpage_background.jpg');
+    text-align: center;
+}
+button {
+    color: black;
+    float: left;
+    font-family: cursive;
+    margin-left: 50px;
+    cursor: pointer;
+}
+.container input {
+    width: 100%;
+    clear: both;
+}
+#kategorije {
+    text-align: center;
+}
+.button {
+    width: 10%;
+    height: 2%;
+    background-color: blue;
+    color: white;
+    display: inline-block;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid black;
+}
+#register  {
+    cursor: pointer;
+    right: 16px;
+    font-family: cursive;
+    font-size: 12px;
+}
+#login {
+    top: 8px;
+    right: 16px;
+    font-size: 15px;
+    font-family: cursive;
+    color: blue;
+    text-align: center;
+    float: right;
+}
+#log_in:hover {
+    text-decoration: underline;
+    color: DeepSkyBlue;
+}
+#register:hover {
+    text-decoration: underline;
+    color: DeepSkyBlue;
+}
+#logbutton {
+    background-color: blue;
+    color: white;
+    display: inline-block;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid black;
+    cursor: pointer;
+}
