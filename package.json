@@ -1,0 +1,25 @@
+{
+  "name": "pi_server",
+  "version": "1.0.0",
+  "description": "Casual website",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrejura/piserver.git"
+  },
+  "keywords": [
+    "website",
+    "server",
+    "storage"
+  ],
+  "author": "andrejura",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andrejura/piserver/issues"
+  },
+  "homepage": "https://github.com/andrejura/piserver#readme"
+}
