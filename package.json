@@ -21,5 +21,15 @@
   "bugs": {
     "url": "https://github.com/andrejura/piserver/issues"
   },
-  "homepage": "https://github.com/andrejura/piserver#readme"
+  "homepage": "https://github.com/andrejura/piserver#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "crypto": "0.0.3",
+    "express": "^4.14.0",
+    "express-session": "^1.14.1",
+    "formidable": "^1.0.17",
+    "fs": "0.0.1-security",
+    "passport": "^0.3.2",
+    "sqlite3": "^3.1.4"
+  }
 }

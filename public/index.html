@@ -12,14 +12,14 @@
             <button type="button" onclick="redirectToG();" class="button">GLASBA</button>
         </p>
         <div id="login" class="container">  
-            <form action="/login">
+            <form action="/login" method="POST">
                 <label for="username">Username</label>
                 <input type="text" name="username" value=""><br>
                 <label for="password">Password</label>
                 <input type="password" name="password" value=""><br>
                 <input id="logbutton" type="submit" value="Log in">
             </form>
-            <p id="register">Register</p>
-        </div>>
+            <a id="register" href="/signup">Register</a>
+        </div>
     </body>
 </html>
