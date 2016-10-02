@@ -9,42 +9,50 @@ var passport = require('passport');
 var bodyParser = require('body-parser');
 var crypto = require('crypto');
 var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database('./database.sqlite3');
+var db = new sqlite3.Database('./database.db');
+var formidable = require('formidable');
 
 db.serialize(function() {
-    db.run("CREATE TABLE IF NOT EXISTS users (field INT, info TEXT)");
-    var stmt = db.prepare("INSERT into users values(?,?)");
-    app.post("/reg", function(req, res) {
-        console.log(req.body);
-    });
-    stmt.finalize;
-    
-    db.each("SELECT id,dt FROM users", function(err, row) {
-        if (err) {
-            throw err;
-        }
-        console.log("User id:" + row.id, row.dt);  
-    });
+    db.run(" \ CREATE TABLE IF NOT EXISTS Users \
+    (Username TEXT, \
+    Email TEXT, \
+    password TEXT)");
 });
-
-
-app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static(path.join(__dirname, '/public')));
 
+
+app.post("/", function(req, res) {
+    var form = new formidable.IncomingForm();
+    
+    form.parse(req, function(err, field, file) {
+        if (err) {
+            res.sendStatuss(500);
+        }
+            var stmt = db.prepare(" \ INSERT INTO Users \
+            (Username, \
+            Email, \
+            Password) \
+            VALUES (?, ?, ?)");
+            stmt.run(field.Username, field.Email, field.Password);
+            stmt.finalize();
+            res.sendFile(__dirname + "/public/index.html");
+    });
+});
 app.get("/signup", function(req, res) {
     res.sendFile(__dirname + "/public/register.html");
 });
 
+
 app.post("/login", function(req, res) {
     console.log(req.body);
+    res.redirect('back');
 });
-/*app.get('*', function(req, res) {
+app.get('*', function(req, res) {
     res.send('Not yet available.');
-});*/
+});
 
 app.listen(port);
 
 // Console will print the message
-console.log('Server running on port ' + port);
-
+console.log('Server running on port ' + port + "!");

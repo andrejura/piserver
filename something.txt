@@ -45,3 +45,18 @@ passport.deserializeUser(function(id, done) {
 
 app.post('/login', passport.authenticate('local', { successRedirect: '/good-login',
                                                     failureRedirect: '/bad-login' }));
+                                                    
+                                                    
+db.serialize(function() {
+    db.run("CREATE TABLE IF NOT EXISTS users (field TEXT, info TEXT)");
+    var stmt = db.prepare("INSERT into users values(?,?)");
+    stmt.run(userName, mail, pass);
+    stmt.finalize;
+    
+    db.each("SELECT field, info FROM users", function(err, row) {
+        if (err) {
+            throw err;
+        }
+        console.log("User id:" + row.field, row.info);  
+    });
+});
