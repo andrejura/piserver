@@ -60,3 +60,14 @@ db.serialize(function() {
         console.log("User id:" + row.field, row.info);  
     });
 });
+
+    var exists = false;
+    console.log(req.body);
+    db.all("SELECT username, password FROM Users");
+    exists = true;
+    console.log(req.body);
+    if (exists) {
+        res.redirect('back');
+    }
+    res.status(500).send('showAlert');
+    res.redirect("/signup");

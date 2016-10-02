@@ -14,27 +14,26 @@ var formidable = require('formidable');
 
 db.serialize(function() {
     db.run(" \ CREATE TABLE IF NOT EXISTS Users \
-    (Username TEXT, \
-    Email TEXT, \
+    (username TEXT, \
+    email TEXT, \
     password TEXT)");
 });
 
 app.use(express.static(path.join(__dirname, '/public')));
 
-
-app.post("/", function(req, res) {
+app.post("/reg", function(req, res) {
     var form = new formidable.IncomingForm();
     
     form.parse(req, function(err, field, file) {
         if (err) {
-            res.sendStatuss(500);
+            res.sendStatus(500);
         }
             var stmt = db.prepare(" \ INSERT INTO Users \
-            (Username, \
-            Email, \
-            Password) \
+            (username, \
+            email, \
+            password) \
             VALUES (?, ?, ?)");
-            stmt.run(field.Username, field.Email, field.Password);
+            stmt.run(field.username, field.email, field.password);
             stmt.finalize();
             res.sendFile(__dirname + "/public/index.html");
     });
@@ -42,12 +41,17 @@ app.post("/", function(req, res) {
 app.get("/signup", function(req, res) {
     res.sendFile(__dirname + "/public/register.html");
 });
-
-
 app.post("/login", function(req, res) {
-    console.log(req.body);
+    var form = new formidable.IncomingForm();
+    form.parse(req, function(err, field, file) {
+        if (err) {
+            res.sendStatus(500);
+        }
+        console.log(field.username, field.password);
+    });
     res.redirect('back');
 });
+
 app.get('*', function(req, res) {
     res.send('Not yet available.');
 });
