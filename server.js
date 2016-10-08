@@ -18,10 +18,9 @@ db.serialize(function() {
     email TEXT, \
     password TEXT)");
 });
-
 app.use(express.static(path.join(__dirname, '/public')));
 
-app.post("/reg", function(req, res) {
+app.post("/", function(req, res) {
     var form = new formidable.IncomingForm();
     
     form.parse(req, function(err, field, file) {
@@ -47,9 +46,22 @@ app.post("/login", function(req, res) {
         if (err) {
             res.sendStatus(500);
         }
-        console.log(field.username, field.password);
+        else {
+            db.all('SELECT * FROM Users', function(err, rows) {
+                if (err) {
+                    throw err;
+                }
+                else {
+                    rows.forEach(function(row) {
+                        if (row.username == field.username && row.password == field.password) {
+                            console.log("Success.");
+                        }
+                    });
+                }
+            });
+        }
     });
-    res.redirect('back');
+    res.redirect("back");
 });
 
 app.get('*', function(req, res) {
@@ -57,6 +69,5 @@ app.get('*', function(req, res) {
 });
 
 app.listen(port);
-
 // Console will print the message
 console.log('Server running on port ' + port + "!");
