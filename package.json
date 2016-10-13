@@ -32,6 +32,7 @@
     "fs": "0.0.1-security",
     "jquery": "^3.1.1",
     "passport": "^0.3.2",
-    "sqlite3": "^3.1.4"
+    "sqlite3": "^3.1.4",
+    "video.js": "^5.11.7"
   }
 }
