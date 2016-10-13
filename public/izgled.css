@@ -92,3 +92,10 @@ button {
     border: 1px solid black;
     cursor: pointer;
 }
+#videowindow {
+    display: block;
+    left: 50%;
+    top: 50%;
+    position: relative;
+    margin: auto;
+}
