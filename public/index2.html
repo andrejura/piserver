@@ -13,7 +13,7 @@
             <button type="button" class="button">GLASBA</button>
         </p>
         <div id="login" class="container">  
-            <form id="logForm" action="/login" method="POST" style="display:">
+            <form id="logForm" action="/login" method="POST" style="display:none">
                 <label for="username">Username or email</label>
                 <input type="text" name="username" value=""><br>
                 <label for="password">Password</label>
@@ -21,15 +21,21 @@
                 <input id="logbutton" type="submit" value="Log in">
                 <a id="register" href="/signup">Register</a>
             </form>
-            <a id="uploadFile" href="/upload" style="display:none">Upload</a>
+            <div>
+                <button type="button" class="button" id="clicked">Upload</button>
+            </div>
+            <div>
+                <form id="upfor" style="display:none">
+                    <input type="file">
+                </form>
+            </div>
         </div>
         <script>
-     /*  $(document).ready(function() {
-           $("#login").submit(function() {
-               $("#logForm").hide();
-               $("#uploadFile").show();
-           });
-        });*/
+            $(document).ready(function() {
+               $("#clicked").click(function() {
+                   $("#upfor").show();
+               });
+            });
         </script>
     </body>
 </html>

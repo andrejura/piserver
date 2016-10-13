@@ -19,13 +19,12 @@ db.serialize(function() {
     password TEXT)");
 });
 app.use(express.static(path.join(__dirname, '/public')));
-
 app.post("/", function(req, res) {
     var form = new formidable.IncomingForm();
     
     form.parse(req, function(err, field, file) {
         if (err) {
-            res.sendStatus(500);
+            return res.sendStatus(500);
         }
             var stmt = db.prepare(" \ INSERT INTO Users \
             (username, \
@@ -34,35 +33,42 @@ app.post("/", function(req, res) {
             VALUES (?, ?, ?)");
             stmt.run(field.username, field.email, field.password);
             stmt.finalize();
-            res.sendFile(__dirname + "/public/index.html");
+            return res.sendFile(__dirname + "/public/index.html");
     });
 });
 app.get("/signup", function(req, res) {
-    res.sendFile(__dirname + "/public/register.html");
+    res.sendFile(__dirname + "/public/index.html");
 });
 app.post("/login", function(req, res) {
     var form = new formidable.IncomingForm();
     form.parse(req, function(err, field, file) {
         if (err) {
-            res.sendStatus(500);
+            return res.sendStatus(500);
         }
         else {
             db.all('SELECT * FROM Users', function(err, rows) {
                 if (err) {
-                    throw err;
+                    return res.sendStatus(500);
                 }
                 else {
                     rows.forEach(function(row) {
-                        if (row.username == field.username && row.password == field.password) {
-                            console.log("Success.");
+                        if (row.username == field.username || row.email == field.username) {
+                            if (row.password == field.password) {
+                                console.log("Logged.");
+                                return res.sendFile(__dirname + "/public/index2.html");
+                            }
+                            else {
+                                console.log("Wrong password.");
+                                return res.send("Wrong password!");
+                            }
                         }
                     });
                 }
             });
         }
     });
-    res.redirect("back");
 });
+
 
 app.get('*', function(req, res) {
     res.send('Not yet available.');
